@@ -29,27 +29,24 @@ namespace BeSpokedBikes.Pages.Products
         [BindProperty]
         public Models.Discounts Discount { get; set; } = new Models.Discounts();
 
-        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
+            int nextDiscountId = await _context.Discounts.MaxAsync(d => d.DiscountID) + 1;
+            Discount.DiscountID = nextDiscountId;
+            
+            var product = await _context.Products.FirstOrDefaultAsync(s => s.ProductID == Discount.ProductID);
+            Discount.Product = product;
+
+            if (product == null)
             {
-                // Get the next available discount ID
-                int nextDiscountId = await _context.Discounts.MaxAsync(d => d.DiscountID) + 1;
-                Discount.DiscountID = nextDiscountId;
-                var Product = await _context.Products.FirstOrDefaultAsync(s => s.ProductID == Discount.ProductID);
-                Discount.Product = Product;
-
-                if (Product == null)
-                {
-                    ViewData["ProductID"] = new SelectList(_context.Products, "ProductID", "ProductID");
-                    return RedirectToPage("./Index");
-                }
-
-
-                _context.Discounts.Add(Discount);
-                await _context.SaveChangesAsync();
+                ViewData["ProductID"] = new SelectList(_context.Products, "ProductID", "ProductID");
                 return RedirectToPage("./Index");
             }
+
+            _context.Discounts.Add(Discount);
+            await _context.SaveChangesAsync();
+            
+            return RedirectToPage("./Index");
         }
     }
 }

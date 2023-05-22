@@ -19,9 +19,9 @@ namespace BeSpokedBikes.Pages.Sales
             _context = context;
         }
 
-        [BindProperty]
-      public Models.Sales Sales { get; set; } = default!;
+        public Models.Sales Sales { get; set; } = default!;
 
+        // This method is executed when the delete page is requested via HTTP GET
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null || _context.Sales == null)
@@ -29,29 +29,35 @@ namespace BeSpokedBikes.Pages.Sales
                 return NotFound();
             }
 
+            // Retrieve the sales data with the specified ID from the database
             var sales = await _context.Sales.FirstOrDefaultAsync(m => m.SalesID == id);
 
             if (sales == null)
             {
                 return NotFound();
             }
-            else 
+            else
             {
                 Sales = sales;
             }
+
             return Page();
         }
 
+        // This method is executed when the delete form is submitted via HTTP POST
         public async Task<IActionResult> OnPostAsync(int? id)
         {
             if (id == null || _context.Sales == null)
             {
                 return NotFound();
             }
+
+            // Find the sales record with the specified ID
             var sales = await _context.Sales.FindAsync(id);
 
             if (sales != null)
             {
+                // Remove the sales record from the context and save the changes
                 Sales = sales;
                 _context.Sales.Remove(Sales);
                 await _context.SaveChangesAsync();

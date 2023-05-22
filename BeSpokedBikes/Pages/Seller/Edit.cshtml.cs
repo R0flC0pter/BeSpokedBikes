@@ -25,12 +25,14 @@ namespace BeSpokedBikes.Pages.Sellers
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            // Check if the provided ID is null or Sellers table is null
             if (id == null || _context.Sellers == null)
             {
                 return NotFound();
             }
 
-            var salespersons =  await _context.Sellers.FirstOrDefaultAsync(m => m.SellerID == id);
+            // Retrieve the salesperson with the specified ID from the Sellers table
+            var salespersons = await _context.Sellers.FirstOrDefaultAsync(m => m.SellerID == id);
             if (salespersons == null)
             {
                 return NotFound();
@@ -43,19 +45,23 @@ namespace BeSpokedBikes.Pages.Sellers
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
+            // Check if the model state is valid
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
+            // Attach the Salespersons object to the context and set its state to Modified
             _context.Attach(Salespersons).State = EntityState.Modified;
 
             try
             {
+                // Save the changes to the database
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
+                // Check if the Salespersons object still exists in the database
                 if (!SalespersonsExists(Salespersons.SellerID))
                 {
                     return NotFound();
@@ -71,7 +77,8 @@ namespace BeSpokedBikes.Pages.Sellers
 
         private bool SalespersonsExists(int id)
         {
-          return (_context.Sellers?.Any(e => e.SellerID == id)).GetValueOrDefault();
+            // Check if there is a salesperson with the specified ID in the Sellers table
+            return (_context.Sellers?.Any(e => e.SellerID == id)).GetValueOrDefault();
         }
     }
 }

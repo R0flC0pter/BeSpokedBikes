@@ -19,10 +19,11 @@ namespace BeSpokedBikes.Pages.Sellers
             _context = context;
         }
 
-        public IList<Models.Sellers> Salespersons { get;set; } = default!;
+        public IList<Models.Sellers> Salespersons { get; set; } = default!;
 
         public async Task OnGetAsync()
         {
+            // Retrieve the list of sellers from the database
             if (_context.Sellers != null)
             {
                 Salespersons = await _context.Sellers.ToListAsync();

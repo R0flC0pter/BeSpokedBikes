@@ -19,25 +19,29 @@ namespace BeSpokedBikes.Pages.Sellers
             _context = context;
         }
 
-      public Models.Sellers Salespersons { get; set; } = default!; 
+        public Models.Sellers Salespersons { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            // Check if the provided ID is null or Sellers table is null
             if (id == null || _context.Sellers == null)
             {
                 return NotFound();
             }
 
+            // Retrieve the salesperson with the specified ID from the Sellers table
             var salespersons = await _context.Sellers
                 .Include(s => s.Sales)
-                .ThenInclude(e =>e.Product)
+                .ThenInclude(e => e.Product)
                 .ThenInclude(e => e.Discounts)
                 .FirstOrDefaultAsync(m => m.SellerID == id);
+
+            // If the salesperson is not found, return NotFound result
             if (salespersons == null)
             {
                 return NotFound();
             }
-            else 
+            else
             {
                 Salespersons = salespersons;
             }

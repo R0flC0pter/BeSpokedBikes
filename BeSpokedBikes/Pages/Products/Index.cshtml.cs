@@ -19,18 +19,14 @@ namespace BeSpokedBikes.Pages.Products
             _context = context;
         }
 
-        public IList<Models.Products> Products { get;set; } = default!;
+        public IList<Models.Products> Products { get; set; } = default!;
+
         public async Task OnGetAsync(int? id)
         {
-
-
-            if (_context.Products != null)
-            {
-                Products = await _context.Products
-                    .Include(p => p.Discounts)
-                    .ToListAsync();
-
-            }
+            // Retrieve all products and include their discounts
+            Products = await _context.Products
+                .Include(p => p.Discounts)
+                .ToListAsync();
         }
     }
 }

@@ -36,18 +36,15 @@ namespace BeSpokedBikes.Pages.Products
                 return NotFound();
             }
             Discounts = discounts;
+
             // Set the value of ViewBag.ProductID
             ViewData["ProductID"] = new SelectList(_context.Products, "ProductID", "Name");
 
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-
-
             _context.Attach(Discounts).State = EntityState.Modified;
 
             try

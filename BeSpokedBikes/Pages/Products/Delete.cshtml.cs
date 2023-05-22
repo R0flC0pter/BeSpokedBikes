@@ -12,15 +12,15 @@ namespace BeSpokedBikes.Pages.Products
 {
     public class DeleteModel : PageModel
     {
-        private readonly BeSpokedBikes.Data.SalesContext _context;
+        private readonly SalesContext _context;
 
-        public DeleteModel(BeSpokedBikes.Data.SalesContext context)
+        public DeleteModel(SalesContext context)
         {
             _context = context;
         }
 
         [BindProperty]
-      public Models.Products Products { get; set; } = default!;
+        public Models.Products Products { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -35,10 +35,11 @@ namespace BeSpokedBikes.Pages.Products
             {
                 return NotFound();
             }
-            else 
+            else
             {
                 Products = products;
             }
+
             return Page();
         }
 
@@ -48,6 +49,7 @@ namespace BeSpokedBikes.Pages.Products
             {
                 return NotFound();
             }
+
             var products = await _context.Products.FindAsync(id);
 
             if (products != null)

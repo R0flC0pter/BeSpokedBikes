@@ -13,9 +13,9 @@ namespace BeSpokedBikes.Pages.Products
 {
     public class EditModel : PageModel
     {
-        private readonly BeSpokedBikes.Data.SalesContext _context;
+        private readonly SalesContext _context;
 
-        public EditModel(BeSpokedBikes.Data.SalesContext context)
+        public EditModel(SalesContext context)
         {
             _context = context;
         }
@@ -30,23 +30,23 @@ namespace BeSpokedBikes.Pages.Products
                 return NotFound();
             }
 
-            var products =  await _context.Products.FirstOrDefaultAsync(m => m.ProductID == id);
+            var products = await _context.Products.FirstOrDefaultAsync(m => m.ProductID == id);
             if (products == null)
             {
                 return NotFound();
             }
             Products = products;
+
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
+
             var SalesPrice = Products.SalePrice;
             var ProductID = Products.ProductID;
             var Discount = await _context.Discounts.FirstOrDefaultAsync(d => d.ProductID == ProductID && d.BeginDate <= DateTime.Now && d.EndDate >= DateTime.Now);
@@ -57,9 +57,11 @@ namespace BeSpokedBikes.Pages.Products
                 var PurchasePrice = SalesPrice - (SalesPrice * (DiscountPercentage / 100));
                 Products.PurchasePrice = PurchasePrice;
             }
-            else {
+            else
+            {
                 Products.PurchasePrice = SalesPrice;
             }
+
             _context.Attach(Products).State = EntityState.Modified;
 
             try
@@ -83,7 +85,7 @@ namespace BeSpokedBikes.Pages.Products
 
         private bool ProductsExists(int id)
         {
-          return (_context.Products?.Any(e => e.ProductID == id)).GetValueOrDefault();
+            return (_context.Products?.Any(e => e.ProductID == id)).GetValueOrDefault();
         }
     }
 }
