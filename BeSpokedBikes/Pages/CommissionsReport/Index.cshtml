@@ -1,0 +1,93 @@
+﻿@page
+@model BeSpokedBikes.Pages.CommissionsReport.IndexModel
+
+@{
+    ViewData["Title"] = "Commission Report";
+}
+
+<h1>Commission Report</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="get">
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="Quarter">Quarter:</label>
+                <div class="col-sm-4">
+                    <select class="form-control" asp-for="Quarter" id="Quarter">
+                        <option value="">-- Select Quarter --</option>
+                        <option value="1">1st Quarter</option>
+                        <option value="2">2nd Quarter</option>
+                        <option value="3">3rd Quarter</option>
+                        <option value="4">4th Quarter</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="Year">Year:</label>
+                <div class="col-sm-4">
+                    <input class="form-control" asp-for="Year" id="Year" placeholder="YYYY" />
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Generate Report" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CommissionReport[0].SalespersonName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CommissionReport[0].Commission)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.CommissionReport) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SalespersonName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Commission)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<canvas id="commissionChart" width="400" height="200"></canvas>
+<script>
+    // Fetch commission data from the backend and assign it to the `commissionData` variable
+    
+        
+
+    // Create a bar graph using Chart.js
+    const commissionChart = new Chart(document.getElementById('commissionChart'), {
+        type: 'bar',
+        data: {
+            labels: @Html.Raw(Json.Serialize(Model.CommissionData.Keys)),
+            datasets: [
+                {
+                    label: 'Commission',
+                    data: @Html.Raw(Json.Serialize(Model.CommissionData.Values)),
+                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }
+            ]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>

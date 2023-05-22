@@ -1,0 +1,106 @@
+﻿@page
+@model BeSpokedBikes.Pages.Products.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Products</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Products.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Products.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Products.Manufacturer)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Products.Manufacturer)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Products.Style)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Products.Style)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Products.Discounts)
+        </dt>
+        @{
+            // Check if the product has any discounts
+            if (Model.Products.Discounts.Any())
+            {
+        <dd class="col-sm-10">
+            <table class="table">
+                <tr>
+                    <th>Discount Percentage</th>
+                    <th>Begin Date</th>
+                    <th>End Date</th>
+                </tr>
+                @foreach (var item in Model.Products.Discounts)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DiscountPercentage)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BeginDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EndDate)
+                        </td>
+                                <td>
+                                    <a asp-page="./EditDiscount" asp-route-productId="@Model.Products.ProductID" asp-route-id="@item.DiscountID">Edit</a>
+                                </td>
+                    </tr>
+                }
+            </table>
+
+        </dd>
+        }
+            else
+            {
+                <div>
+                    <h4>No Discounts Available</h4>
+                </div>
+            }
+        }
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Products.PurchasePrice)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Products.PurchasePrice)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Products.SalePrice)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Products.SalePrice)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Products.QuantityInStock)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Products.QuantityInStock)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Products.CommissionPercentage)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Products.CommissionPercentage)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Products?.ProductID">Edit</a> |
+    <a asp-page="./Index">Back to List</a> |
+    <a asp-page="./CreateDiscount" asp-route-productId="@Model.Products.ProductID">Add Discount</a> 
+
+</div>
+

@@ -1,0 +1,65 @@
+﻿@page
+@model BeSpokedBikes.Pages.Sellers.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Salespersons</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Salespersons.SellerID" />
+            <div class="form-group">
+                <label asp-for="Salespersons.FirstName" class="control-label"></label>
+                <input asp-for="Salespersons.FirstName" class="form-control" />
+                <span asp-validation-for="Salespersons.FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Salespersons.LastName" class="control-label"></label>
+                <input asp-for="Salespersons.LastName" class="form-control" />
+                <span asp-validation-for="Salespersons.LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Salespersons.Address" class="control-label"></label>
+                <input asp-for="Salespersons.Address" class="form-control" />
+                <span asp-validation-for="Salespersons.Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Salespersons.Phone" class="control-label"></label>
+                <input asp-for="Salespersons.Phone" class="form-control" />
+                <span asp-validation-for="Salespersons.Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Salespersons.StartDate" class="control-label"></label>
+                <input asp-for="Salespersons.StartDate" class="form-control" />
+                <span asp-validation-for="Salespersons.StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Salespersons.EndDate" class="control-label"></label>
+                <input asp-for="Salespersons.EndDate" class="form-control" />
+                <span asp-validation-for="Salespersons.EndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Salespersons.Manager" class="control-label"></label>
+                <input asp-for="Salespersons.Manager" class="form-control" />
+                <span asp-validation-for="Salespersons.Manager" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,64 @@
+﻿@page
+@model BeSpokedBikes.Pages.Products.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Products</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Products.ProductID" class="control-label"></label>
+                <input asp-for="Products.ProductID" class="form-control" />
+                <span asp-validation-for="Products.ProductID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Products.Name" class="control-label"></label>
+                <input asp-for="Products.Name" class="form-control" />
+                <span asp-validation-for="Products.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Products.Manufacturer" class="control-label"></label>
+                <input asp-for="Products.Manufacturer" class="form-control" />
+                <span asp-validation-for="Products.Manufacturer" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Products.Style" class="control-label"></label>
+                <input asp-for="Products.Style" class="form-control" />
+                <span asp-validation-for="Products.Style" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Products.SalePrice" class="control-label"></label>
+                <input asp-for="Products.SalePrice" class="form-control" />
+                <span asp-validation-for="Products.SalePrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Products.QuantityInStock" class="control-label"></label>
+                <input asp-for="Products.QuantityInStock" class="form-control" />
+                <span asp-validation-for="Products.QuantityInStock" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Products.CommissionPercentage" class="control-label"></label>
+                <input asp-for="Products.CommissionPercentage" class="form-control" />
+                <span asp-validation-for="Products.CommissionPercentage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

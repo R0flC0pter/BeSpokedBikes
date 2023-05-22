@@ -1,0 +1,49 @@
+﻿@page
+@model BeSpokedBikes.Pages.Sales.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Sales</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Sales.SellerID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Sales.SellerID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Sales.SalesDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Sales.SalesDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Sales.Product)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(modelItem => modelItem.Sales.Product.Name)
+        </dd>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Sales.Product.PurchasePrice)
+        </dd>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Sales.Seller.FirstName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Sales.Customer)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Sales.Customer.FirstName)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Sales?.SalesID">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

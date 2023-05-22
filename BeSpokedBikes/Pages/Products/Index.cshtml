@@ -1,0 +1,77 @@
+﻿@page
+@model BeSpokedBikes.Pages.Products.IndexModel
+
+@{
+    ViewData["Title"] = "Product Inventory";
+}
+
+<h1>Product Inventory</h1>
+
+<p>
+    <a asp-page="Create">New Product</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Products[0].ProductID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Products[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Products[0].Manufacturer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Products[0].Style)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Products[0].PurchasePrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Products[0].SalePrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Products[0].QuantityInStock)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Products[0].CommissionPercentage)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Products) {
+        <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductID)
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Manufacturer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Style)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PurchasePrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SalePrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuantityInStock)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CommissionPercentage)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ProductID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ProductID">Details</a> 
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

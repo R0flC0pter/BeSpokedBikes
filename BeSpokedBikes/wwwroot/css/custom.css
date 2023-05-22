@@ -1,0 +1,49 @@
+﻿body {
+    color: papayawhip;
+    margin-bottom: 60px;
+    background-image: url('/images/Bike.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.9
+    ;
+}
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgb(128, 128, 128); /* Adjust the rgba color and opacity (0 to 1) to your desired level */
+        z-index: -1;
+    }
+table {
+    opacity: 0.9; /* Adjust the opacity as desired */
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust the background color as desired */
+}
+    table thead {
+        color: papayawhip;
+    }
+    table tbody {
+        color: papayawhip; /* Set the text color to white */
+    }
+.custom-navbar .navbar-brand,
+.custom-navbar .nav-link {
+    font-family: "Arial", 'Cascadia Code'; /* Change the font family to your desired font */
+    font-weight: bolder; /* Change the font weight if desired */
+    /* Add any other styles you want to apply */
+}
+.form-control {
+    background-color: rgba(255, 255, 255, 0.8); /* Adjust the background color and opacity as desired */
+    color: black; /* Adjust the text color as desired */
+    border-color: #ccc; /* Adjust the border color as desired */
+}
+<style >
+.logo-image {
+    width: 30px; /* Adjust the width as needed */
+    height: auto; /* Maintain aspect ratio */
+    margin-right: 10px; /* Adjust the margin as needed */
+}
+
+</style >

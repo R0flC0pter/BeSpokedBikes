@@ -1,0 +1,83 @@
+﻿@page
+@model BeSpokedBikes.Pages.Sales.IndexModel
+
+@{
+    ViewData["Title"] = "Sales";
+}
+
+<h1>Sales</h1>
+
+<p>
+    <a asp-page="Create">Log a Sale</a>
+</p>
+<div class="row">
+    <div class="col-md-4">
+        <form method="get">
+            <div class="form-group">
+                <label asp-for="BeginDate">Sales Date From</label>
+                <input asp-for="BeginDate" class="form-control" type="date" />
+            </div>
+            <div class="form-group">
+                <label asp-for="EndDate">Sales Date To</label>
+                <input asp-for="EndDate" class="form-control"type ="date" />
+            </div>
+            <div class=" form-group">
+                <input type="submit" value="Filter" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Sales[0].Product)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sales[0].Seller.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sales[0].SalesDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sales[0].Product.PurchasePrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sales[0].Customer.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sales[0].Product.Commission)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Sales) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Name)
+            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer.FullName)
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SalesDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.PurchasePrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Seller.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.Commission,"{0:C}")
+                </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.SalesID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.SalesID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.SalesID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
