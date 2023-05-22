@@ -29,5 +29,9 @@ namespace BeSpokedBikes.Data
             modelBuilder.Entity<Discounts>().ToTable("Discounts");
             modelBuilder.Entity<Customers>().ToTable("Customers");
         }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlite("Data Source=your-database-file.db");
+        }
     }
 }

@@ -62,10 +62,15 @@ namespace BeSpokedBikes.Data
             };
             context.Discounts.AddRange(discount);
             context.SaveChanges();
-            foreach (var product in context.Products)
+            foreach (var product in context.Products.ToList())
             {
-                var discountsForProduct = context.Discounts.Where(d => d.ProductID == product.ProductID && d.BeginDate <= DateTime.Now && d.EndDate >= DateTime.Now);
-                var applicableDiscount = discountsForProduct.OrderByDescending(d => d.DiscountPercentage).FirstOrDefault();
+                var discountsForProduct = context.Discounts
+                    .Where(d => d.ProductID == product.ProductID && d.BeginDate <= DateTime.Now && d.EndDate >= DateTime.Now)
+                    .ToList();
+
+                var applicableDiscount = discountsForProduct
+                    .OrderByDescending(d => d.DiscountPercentage)
+                    .FirstOrDefault();
 
                 if (applicableDiscount != null)
                 {
